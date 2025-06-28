@@ -3,7 +3,6 @@ import { SidebarNavigation } from "./components/sidebar-navigation";
 import { Header } from "./components/header";
 import { StatsCard } from "./components/stats-card";
 import { SalesChart } from "./components/sales-chart";
-
 export default function App() {
   return (
     <div className="flex h-screen bg-default-50">
@@ -15,7 +14,7 @@ export default function App() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        
+
         {/* Dashboard Content */}
         <div className="flex-1 overflow-auto p-6">
           {/* Stats Grid */}
