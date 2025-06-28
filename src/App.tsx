@@ -1,9 +1,25 @@
 import React from "react";
 import { SidebarNavigation } from "./components/sidebar-navigation";
 import { Header } from "./components/header";
-import { StatsCard } from "./components/stats-card";
-import { SalesChart } from "./components/sales-chart";
+import {
+  useNavigate,
+  useHref,
+  NavigateOptions,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Dashboard from "./page/dashboard-page/dashboard";
+import Analytics from "./page/analytics-page/analytics";
+import Customers from "./page/customers-page/customers";
+import Orders from "./page/orders-page/orders";
+import Settings from "./page/settings-page/settings";
+declare module "@react-types/shared" {
+  interface RouterConfig {
+    routerOptions: NavigateOptions;
+  }
+}
 export default function App() {
+  const navigate = useNavigate();
   return (
     <div className="flex h-screen bg-default-50">
       {/* Sidebar */}
@@ -15,46 +31,14 @@ export default function App() {
       <main className="flex-1 flex flex-col overflow-hidden">
         <Header />
 
-        {/* Dashboard Content */}
-        <div className="flex-1 overflow-auto p-6">
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <StatsCard
-              title="Total Revenue"
-              value="$45,231"
-              change="+20.1% from last month"
-              isPositive={true}
-              icon="lucide:dollar-sign"
-            />
-            <StatsCard
-              title="Active Users"
-              value="1,234"
-              change="+12.5% from last month"
-              isPositive={true}
-              icon="lucide:users"
-            />
-            <StatsCard
-              title="New Orders"
-              value="450"
-              change="-3.4% from last month"
-              isPositive={false}
-              icon="lucide:shopping-cart"
-            />
-            <StatsCard
-              title="Conversion Rate"
-              value="2.4%"
-              change="+4.1% from last month"
-              isPositive={true}
-              icon="lucide:percent"
-            />
-          </div>
-
-          {/* Charts */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <SalesChart />
-            <SalesChart />
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
       </main>
     </div>
   );
